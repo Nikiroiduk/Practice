@@ -14,8 +14,13 @@ namespace EducationalPracticeBL.Data
         {
             using (FileStream fileStream = File.Create(path))
             {
-                AddText(fileStream, "test0, test1, test2, test3");
-                AddText(fileStream, "value0, value1, value2, value3");
+                foreach (var item in electricityGenerations)
+                {
+                    foreach (var key in item.DataDictionary.Keys)
+                    {
+                        AddText(fileStream, $"{item.Country.Name},{item.Country.Code},{key},{item.DataDictionary[key]}");
+                    }
+                }
             }
             return true;
         }
