@@ -15,10 +15,11 @@ namespace EducationalPracticeBL.Data
             {
                 foreach (var item in electricityGenerations)
                 {
-                    foreach (var key in item.DataDictionary.Keys)
-                    {
-                        AddText(fileStream, $"{item.Country.Name},{item.Country.Code},{key},{item.DataDictionary[key]}");
-                    }
+                    AddText(fileStream, $"{item.Country.Name},{item.Country.Code},{item.Year},{item.Value}");
+                    //foreach (var key in item.DataDictionary.Keys)
+                    //{
+                    //    AddText(fileStream, $"{item.Country.Name},{item.Country.Code},{key},{item.DataDictionary[key]}");
+                    //}
                 }
             }
             return true;
@@ -34,25 +35,14 @@ namespace EducationalPracticeBL.Data
                 while(fileStream.Read(b, 0, b.Length) > 0){
                     var separators = new char[] { '\n', ',' };
                     var line = temp.GetString(b).Split(separators);
-                    var tmp = 0;
-                    var currentDictionary = new Dictionary<int, double>();
-                    for (int i = 4; i < line.Length - 1; i+=4, tmp++)
+                    for (int i = 0; i < line.Length - 1; i+=4)
                     {
-                        if (tmp > 17)
+                        result.Add(new ElectricityGeneration
                         {
-                            result.Add(new ElectricityGeneration
-                            {
-                                Country = new Country { Code = line[i + 1], Name = line[i] },
-                                DataDictionary = currentDictionary
-                            });
-                            tmp = 0;
-                            currentDictionary = new Dictionary<int, double>();
-                        }
-                        else 
-                        {
-                            currentDictionary.Add(Convert.ToInt32(line[i + 2]), Convert.ToDouble(line[i + 3]));
-                        }
-                        
+                            Country = new Country { Code = line[i + 1], Name = line[i] },
+                            Year = Convert.ToInt32(line[i + 2]),
+                            Value = Convert.ToDouble(line[i + 3])
+                        });
                     }
                 }
             }

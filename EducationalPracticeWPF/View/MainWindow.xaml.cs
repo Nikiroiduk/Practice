@@ -23,5 +23,10 @@ namespace EducationalPracticeWPF.View
         {
             InitializeComponent();
         }
+
+        private void Window_ContentRendered(object sender, EventArgs e)
+        {
+            IncomePieChart.Update();
+        }
     }
 }
