@@ -2,14 +2,24 @@
 using System;
 using System.IO;
 using System.Reflection;
+using System.Text;
 
 namespace EducationalPracticeCMD
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            StatisticSerializer.Serialize(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), null);
+            //DataService.Save("C:/Users/Nikit/source/repos/Nikiroiduk/EducationalPractice/EducationalPracticeCMD/bin/Debug/");
+            var test = ElectricityGenerationDataService.Load("C:/Users/Nikit/source/repos/Nikiroiduk/EducationalPractice/EducationalPracticeCMD/bin/Debug/EnergyStatistics.csv");
+            foreach (var item in test)  
+            {
+                foreach (var key in item.DataDictionary.Keys)
+                {
+                    Console.Write($"{item.Country.Name} {item.Country.Code} ");
+                    Console.Write($"{key} {item.DataDictionary[key]}\n");
+                }
+            }
         }
     }
 }
