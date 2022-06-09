@@ -10,4 +10,8 @@
     <ProjectReference Include="..\EducationalPracticeBL\EducationalPracticeBL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Model\Command\" />
+  </ItemGroup>
+
 </Project>

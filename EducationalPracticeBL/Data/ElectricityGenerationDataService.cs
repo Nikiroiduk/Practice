@@ -2,9 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace EducationalPracticeBL.Data
 {
@@ -12,6 +10,7 @@ namespace EducationalPracticeBL.Data
     {
         public static bool Save(string path, List<ElectricityGeneration> electricityGenerations)
         {
+            if (electricityGenerations == null) return false;
             using (FileStream fileStream = File.Create(path))
             {
                 foreach (var item in electricityGenerations)
@@ -27,7 +26,7 @@ namespace EducationalPracticeBL.Data
 
         public static List<ElectricityGeneration> Load(string path)
         {
-            List<ElectricityGeneration> meh = new();
+            List<ElectricityGeneration> result = new();
             UTF8Encoding temp = new(true);
             using (FileStream fileStream = File.OpenRead(path))
             {
@@ -41,7 +40,7 @@ namespace EducationalPracticeBL.Data
                     {
                         if (tmp > 17)
                         {
-                            meh.Add(new ElectricityGeneration
+                            result.Add(new ElectricityGeneration
                             {
                                 Country = new Country { Code = line[i + 1], Name = line[i] },
                                 DataDictionary = currentDictionary
@@ -57,7 +56,7 @@ namespace EducationalPracticeBL.Data
                     }
                 }
             }
-            return meh;
+            return result;
         }
 
         private static void AddText(FileStream fs, string value)
