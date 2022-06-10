@@ -25,6 +25,17 @@ namespace EducationalPracticeBL.Data
             return true;
         }
 
+        public static string CreateCSVText(List<ElectricityGeneration> electricityGenerations)
+        {
+            var result = "";
+            
+            foreach (var item in electricityGenerations)
+            {
+                result += $"{item.Country.Name}\t{item.Country.Code}\t{item.Year}\t{item.Value}\tTW/h\n";
+            }
+            return result;
+        }
+
         public static List<ElectricityGeneration> Load(string path)
         {
             List<ElectricityGeneration> result = new();

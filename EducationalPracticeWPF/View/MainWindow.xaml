@@ -12,25 +12,34 @@
         <local:MainWindowViewModel/>
     </Window.DataContext>
     <DockPanel>
-        <Menu>
-            <MenuItem Header="Table View">
-                <MenuItem Header="Meh"/>
-                <MenuItem Header="Meh 2"/>
+        <Menu DockPanel.Dock="Top" Height="40">
+            <MenuItem Header="File" Height="30" Margin="5">
+                <MenuItem Header="Open" Command="{Binding OpenFileCommand}"/>
+                <MenuItem Header="Save" Command="{Binding SaveFileCommand}"/>
+                <MenuItem Header="Print" Command="{Binding PrintFileCommand}"/>
+                <MenuItem Header="Print Result"/>
             </MenuItem>
-            <MenuItem Header="Chart View"/>
+            <MenuItem Header="View" Height="30" Margin="5">
+                <MenuItem Header="Full Table" Command="{Binding FullTableView}"/>
+                <MenuItem Header="Expandable Table"/>
+                <MenuItem Header="Pie Chart"/>
+                <MenuItem Header="Cartesian Chart"/>
+            </MenuItem>
         </Menu>
-    <TabControl>
+        <Frame DockPanel.Dock="Bottom" Content="{Binding ActivePage}" NavigationUIVisibility="Hidden"></Frame>
+    </DockPanel>
+        <!--<Grid>
+            <DataGrid ScrollViewer.CanContentScroll="False" AutoGenerateColumns="False" ItemsSource="{Binding ListData}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Code" Binding="{Binding Country.Code}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Name" Binding="{Binding Country.Name}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Year" Binding="{Binding Year}" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Value (TW/h)" Binding="{Binding Value}" IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>-->
+        <!--<TabControl>
         <TabItem Height="50" Margin="5" Header="Table View">
-            <Grid>
-                <DataGrid ScrollViewer.CanContentScroll="False" AutoGenerateColumns="False" ItemsSource="{Binding ListData}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Code" Binding="{Binding Country.Code}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Name" Binding="{Binding Country.Name}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Year" Binding="{Binding Year}" IsReadOnly="True"/>
-                        <DataGridTextColumn Header="Value (TW/h)" Binding="{Binding Value}" IsReadOnly="True"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-            </Grid>
         </TabItem>
         <TabItem Height="50" Margin="5" Header="Chart View">
             <lvc:PieChart Margin="0, 70, 0, 0" x:Name="IncomePieChart" Series="{Binding IncomePieChart}" 
@@ -44,6 +53,5 @@
             </lvc:PieChart>
         </TabItem>
         
-    </TabControl>
-    </DockPanel>
+    </TabControl>-->
 </Window>

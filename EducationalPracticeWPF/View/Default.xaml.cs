@@ -10,23 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace EducationalPracticeWPF.View
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Default.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Default : Page
     {
-        public MainWindow()
+        public Default()
         {
             InitializeComponent();
-        }
-
-        private void Window_ContentRendered(object sender, EventArgs e)
-        {
-            //IncomePieChart.Update();
         }
     }
 }
