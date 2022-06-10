@@ -15,6 +15,16 @@
                 <DataGridTextColumn Header="Year" Binding="{Binding Year}" IsReadOnly="True"/>
                 <DataGridTextColumn Header="Value (TW/h)" Binding="{Binding Value}" IsReadOnly="True"/>
             </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Remove"
+                            Command="{Binding RemoveItem}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}" />
+                    <MenuItem Header="Change"
+                            Command="{Binding ChangeItem}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
         </DataGrid>
     </Grid>
 </Page>

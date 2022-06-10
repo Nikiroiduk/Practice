@@ -16,6 +16,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Printing;
 using System.Windows.Documents;
+using EducationalPracticeWPF.View.Exercises;
+using System.Collections.ObjectModel;
 
 namespace EducationalPracticeWPF.ViewModel
 {
@@ -28,6 +30,11 @@ namespace EducationalPracticeWPF.ViewModel
             SaveFileCommand = new LambdaCommand(OnSaveFileCommand, CanSaveFileCommand);
             PrintFileCommand = new LambdaCommand(OnPrintFileCommand, CanPrintFileCommand);
             FullTableView = new LambdaCommand(OnFullTableView, CanFullTableView);
+            Exercise1Command = new LambdaCommand(OnExercise1Command, CanExercise1Command);
+            Exercise2Command = new LambdaCommand(OnExercise2Command, CanExercise2Command);
+            Exercise3Command = new LambdaCommand(OnExercise3Command, CanExercise3Command);
+            PrintResultCommand = new LambdaCommand(OnPrintResultCommand, CanPrintResultCommand);
+            ExpandableTableCommand = new LambdaCommand(OnExpandableTableCommand, CanExpandableTableCommand);
             #endregion
             //UpdateIncomePieChart();
         }
@@ -75,6 +82,88 @@ namespace EducationalPracticeWPF.ViewModel
         }
         #endregion
 
+
+        #region Exercise1Command
+        public ICommand Exercise1Command { get; }
+
+        private bool CanExercise1Command(object p) => true;
+        private void OnExercise1Command(object p)
+        {
+            var pg = new Exercise1();
+            pg.DataContext = ExerciseService.Exercise1(ListData);
+            ActivePage = pg;
+        }
+        #endregion
+
+        #region Exercise2Command
+        public ICommand Exercise2Command { get; }
+
+        private bool CanExercise2Command(object p) => true;
+        private void OnExercise2Command(object p)
+        {
+            var pg = new Exercise2();
+            pg.DataContext = ExerciseService.Exercise2(ListData);
+            ActivePage = pg;
+        }
+        #endregion
+
+        #region Exercise3Command
+        public ICommand Exercise3Command { get; }
+
+        private bool CanExercise3Command(object p) => true;
+        private void OnExercise3Command(object p)
+        {
+            var pg = new Exercise3();
+            pg.DataContext = ExerciseService.Exercise3(ListData);
+            ActivePage = pg;
+        }
+        #endregion
+
+        #region ExpandableTableCommand
+        public ICommand ExpandableTableCommand { get; }
+
+        private bool CanExpandableTableCommand(object p) => true;
+        private void OnExpandableTableCommand(object p)
+        {
+            var pg = new ExpandableTable();
+            pg.DataContext = new ExpandableTableViewModel(ListData);
+            ActivePage = pg;
+        }
+        #endregion
+
+        #region PrintResultCommand
+        public ICommand PrintResultCommand { get; }
+
+        private bool CanPrintResultCommand(object p) => true;
+        private void OnPrintResultCommand(object p)
+        {
+            PrintDialog printDialog = new();
+            var result = $"Exercise 1\n" +
+                $"This query displays the country that produced the most electricity in 2015\n";
+            var tmp = ExerciseService.Exercise1(ListData);
+            foreach (var item in tmp)
+            {
+                result += $"{item.Country.Code}\t{item.Country.Name}\t{item.Year}\t{item.Value}\tTW/h\n";
+            }
+            result += $"\nExercise 2\n";
+            tmp = ExerciseService.Exercise2(ListData);
+            foreach (var item in tmp)
+            {
+                result += $"{item.Country.Code}\t{item.Country.Name}\t{item.Year}\t{item.Value}\tTW/h\n";
+            }
+            result += $"\nExercise 3\n";
+            tmp = ExerciseService.Exercise3(ListData);
+            foreach (var item in tmp)
+            {
+                result += $"{item.Country.Code}\t{item.Country.Name}\t{item.Year}\t{item.Value}\tTW/h\n";
+            }
+            FlowDocument doc = new FlowDocument(new Paragraph(new Run(result)));
+            doc.Name = "CSV_print";
+            IDocumentPaginatorSource idpSource = doc;
+            printDialog.PrintDocument(idpSource.DocumentPaginator, "Hello WPF Printing.");
+        }
+        #endregion
+
         #region PrintFileCommand
         public ICommand PrintFileCommand { get; }
 
@@ -113,8 +202,8 @@ namespace EducationalPracticeWPF.ViewModel
         #endregion
 
         #region ListData
-        private List<ElectricityGeneration> _ListData = null;
-        public List<ElectricityGeneration> ListData
+        private ObservableCollection<ElectricityGeneration> _ListData = null;
+        public ObservableCollection<ElectricityGeneration> ListData
         {
             get => _ListData;
             set => Set(ref _ListData, value);

@@ -1,6 +1,7 @@
 ﻿using EducationalPracticeBL.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
 
@@ -8,7 +9,7 @@ namespace EducationalPracticeBL.Data
 {
     public static class ElectricityGenerationDataService
     {
-        public static bool Save(string path, List<ElectricityGeneration> electricityGenerations)
+        public static bool Save(string path, ObservableCollection<ElectricityGeneration> electricityGenerations)
         {
             if (electricityGenerations == null) return false;
             using (FileStream fileStream = File.Create(path))
@@ -25,7 +26,7 @@ namespace EducationalPracticeBL.Data
             return true;
         }
 
-        public static string CreateCSVText(List<ElectricityGeneration> electricityGenerations)
+        public static string CreateCSVText(ObservableCollection<ElectricityGeneration> electricityGenerations)
         {
             var result = "";
             
@@ -36,9 +37,9 @@ namespace EducationalPracticeBL.Data
             return result;
         }
 
-        public static List<ElectricityGeneration> Load(string path)
+        public static ObservableCollection<ElectricityGeneration> Load(string path)
         {
-            List<ElectricityGeneration> result = new();
+            ObservableCollection<ElectricityGeneration> result = new();
             UTF8Encoding temp = new(true);
             using (FileStream fileStream = File.OpenRead(path))
             {

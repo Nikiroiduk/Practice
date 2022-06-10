@@ -17,13 +17,18 @@
                 <MenuItem Header="Open" Command="{Binding OpenFileCommand}"/>
                 <MenuItem Header="Save" Command="{Binding SaveFileCommand}"/>
                 <MenuItem Header="Print" Command="{Binding PrintFileCommand}"/>
-                <MenuItem Header="Print Result"/>
+                <MenuItem Header="Print Result" Command="{Binding PrintResultCommand}"/>
             </MenuItem>
             <MenuItem Header="View" Height="30" Margin="5">
                 <MenuItem Header="Full Table" Command="{Binding FullTableView}"/>
-                <MenuItem Header="Expandable Table"/>
+                <MenuItem Header="Expandable Table" Command="{Binding ExpandableTableCommand}"/>
                 <MenuItem Header="Pie Chart"/>
                 <MenuItem Header="Cartesian Chart"/>
+                <MenuItem Header="Exercises">
+                    <MenuItem Header="Exercise 1" Command="{Binding Exercise1Command}"/>
+                    <MenuItem Header="Exercise 2" Command="{Binding Exercise2Command}"/>
+                    <MenuItem Header="Exercise 3" Command="{Binding Exercise3Command}"/>
+                </MenuItem>
             </MenuItem>
         </Menu>
         <Frame DockPanel.Dock="Bottom" Content="{Binding ActivePage}" NavigationUIVisibility="Hidden"></Frame>
