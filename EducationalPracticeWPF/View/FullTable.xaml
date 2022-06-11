@@ -23,6 +23,9 @@
                     <MenuItem Header="Change"
                             Command="{Binding ChangeItem}"
                             CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}" />
+                    <MenuItem Header="Add"
+                            Command="{Binding AddItem}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}" />
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>

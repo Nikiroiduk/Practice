@@ -4,10 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:EducationalPracticeWPF.ViewModel"
-        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800"
-        ContentRendered="Window_ContentRendered">
+        Title="MainWindow" Height="450" Width="800">
     <Window.DataContext>
         <local:MainWindowViewModel/>
     </Window.DataContext>
@@ -21,9 +19,10 @@
             </MenuItem>
             <MenuItem Header="View" Height="30" Margin="5">
                 <MenuItem Header="Full Table" Command="{Binding FullTableView}"/>
-                <MenuItem Header="Expandable Table" Command="{Binding ExpandableTableCommand}"/>
-                <MenuItem Header="Pie Chart"/>
-                <MenuItem Header="Cartesian Chart"/>
+                <MenuItem Header="Charts">
+                    <MenuItem Header="Pie Chart" Command="{Binding PieChartCommand}"/>
+                    <MenuItem Header="Cartesian Chart" Command="{Binding CartesianChartCommand}"/>
+                </MenuItem>
                 <MenuItem Header="Exercises">
                     <MenuItem Header="Exercise 1" Command="{Binding Exercise1Command}"/>
                     <MenuItem Header="Exercise 2" Command="{Binding Exercise2Command}"/>
