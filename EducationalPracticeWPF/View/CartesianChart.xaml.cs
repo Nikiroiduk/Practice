@@ -24,5 +24,10 @@ namespace EducationalPracticeWPF.View
         {
             InitializeComponent();
         }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            Chart.Update();
+        }
     }
 }

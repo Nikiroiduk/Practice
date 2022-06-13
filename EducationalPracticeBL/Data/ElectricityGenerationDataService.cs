@@ -51,7 +51,7 @@ namespace EducationalPracticeBL.Data
                     {
                         result.Add(new ElectricityGeneration
                         {
-                            Country = new Country { Code = line[i + 1], Name = line[i] },
+                            Country = new Country(line[i + 1], line[i]),
                             Year = Convert.ToInt32(line[i + 2]),
                             Value = Convert.ToDouble(line[i + 3])
                         });

@@ -45,8 +45,8 @@ namespace EducationalPracticeWPF.ViewModel
             }
             set
             {
-                UpdatePieChart();
                 Set(ref _ComboBoxSelected, value);
+                UpdatePieChart();
             }
         }
         #endregion
@@ -68,6 +68,7 @@ namespace EducationalPracticeWPF.ViewModel
             var distinctValues = ListData.Select(p => p.Country.Name)
                                          .Distinct()
                                          .ToList();
+            distinctValues.RemoveAt(0);
 
             foreach (var item in distinctValues)
             {

@@ -5,20 +5,39 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:EducationalPracticeWPF.View"
       xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       d:Background="White"
-      Title="CartesianChart">
-
+      Title="CartesianChart"
+      Loaded="Page_Loaded">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="6*"/>
-        </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0">
-            <Label FontSize="16" Content="The current graph shows the amount of energy produced in countries in"/>
-            <ComboBox Margin="4, 0, 0, 0" SelectedItem="{Binding ComboBoxSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="16" ItemsSource="{Binding ComboBoxData}"/>
-        </StackPanel>
-        <lvc:CartesianChart Margin="0, 70, 0, 0" x:Name="ChartTest" Series="{Binding CartesianChart}" DataTooltip="{x:Null}"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="4*"/>
+        </Grid.ColumnDefinitions>
+        <ListView ItemsSource="{Binding ListCountries}">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem" BasedOn="{StaticResource MaterialDesignListBoxItem}">
+                    <Setter Property="Focusable" Value="false"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <CheckBox IsChecked="{Binding isSelected}"/>
+                        <Label Content="{Binding Name}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <lvc:CartesianChart Grid.Column="1" Margin="10" x:Name="Chart" Series="{Binding Chart}">
+            <lvc:CartesianChart.AxisX>
+                <lvc:Axis Title="Year" Labels="{Binding Labels}"/>
+            </lvc:CartesianChart.AxisX>
+            <lvc:CartesianChart.AxisY>
+                <lvc:Axis Title="Production" LabelFormatter="{Binding YFormatter}"/>
+            </lvc:CartesianChart.AxisY>
+        </lvc:CartesianChart>
     </Grid>
 </Page>

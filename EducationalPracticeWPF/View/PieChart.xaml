@@ -16,7 +16,7 @@
             <RowDefinition Height="6*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="0">
-            <Label FontSize="16" Content="The current graph shows the amount of energy produced in countries in"/>
+            <Label FontSize="16" Content="The current graph shows the amount of energy produced by countries in"/>
             <ComboBox Margin="4, 0, 0, 0" SelectedItem="{Binding ComboBoxSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="16" ItemsSource="{Binding ComboBoxData}"/>
         </StackPanel>
         <lvc:PieChart Grid.Row="1" Margin="10" x:Name="Chart" Series="{Binding PieChart}" 
@@ -25,7 +25,7 @@
                 <lvc:DefaultLegend BulletSize="20"></lvc:DefaultLegend>
             </lvc:PieChart.ChartLegend>
             <lvc:PieChart.DataTooltip>
-                <lvc:DefaultTooltip BulletSize="20"></lvc:DefaultTooltip>
+                <lvc:DefaultTooltip SelectionMode="OnlySender" BulletSize="20"></lvc:DefaultTooltip>
             </lvc:PieChart.DataTooltip>
         </lvc:PieChart>
     </Grid>

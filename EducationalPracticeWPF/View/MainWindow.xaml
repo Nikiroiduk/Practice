@@ -32,30 +32,4 @@
         </Menu>
         <Frame DockPanel.Dock="Bottom" Content="{Binding ActivePage}" NavigationUIVisibility="Hidden"></Frame>
     </DockPanel>
-        <!--<Grid>
-            <DataGrid ScrollViewer.CanContentScroll="False" AutoGenerateColumns="False" ItemsSource="{Binding ListData}">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Code" Binding="{Binding Country.Code}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Name" Binding="{Binding Country.Name}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Year" Binding="{Binding Year}" IsReadOnly="True"/>
-                    <DataGridTextColumn Header="Value (TW/h)" Binding="{Binding Value}" IsReadOnly="True"/>
-                </DataGrid.Columns>
-            </DataGrid>
-        </Grid>-->
-        <!--<TabControl>
-        <TabItem Height="50" Margin="5" Header="Table View">
-        </TabItem>
-        <TabItem Height="50" Margin="5" Header="Chart View">
-            <lvc:PieChart Margin="0, 70, 0, 0" x:Name="IncomePieChart" Series="{Binding IncomePieChart}" 
-                                                      LegendLocation="Right" InnerRadius="70">
-                <lvc:PieChart.ChartLegend>
-                    <lvc:DefaultLegend BulletSize="20"></lvc:DefaultLegend>
-                </lvc:PieChart.ChartLegend>
-                <lvc:PieChart.DataTooltip>
-                    <lvc:DefaultTooltip BulletSize="20"></lvc:DefaultTooltip>
-                </lvc:PieChart.DataTooltip>
-            </lvc:PieChart>
-        </TabItem>
-        
-    </TabControl>-->
 </Window>

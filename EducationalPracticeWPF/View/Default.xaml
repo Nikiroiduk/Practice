@@ -9,6 +9,6 @@
       Title="Default">
 
     <Grid>
-        <Label Content="Educaional Practice" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="26"/>
+        <Label Content="Educational Practice" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="26"/>
     </Grid>
 </Page>
