@@ -9,6 +9,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  hooks_riverpod: ^2.3.6
+  path: ^1.8.3
   sqflite: ^2.2.8+4
 
 dev_dependencies:
