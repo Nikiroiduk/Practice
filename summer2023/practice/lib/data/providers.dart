@@ -5,5 +5,5 @@ import 'package:practice/data/services/db_actions.dart';
 
 // TODO: DbAction interface?
 final databaseProvider = Provider<DbAction>((_) => DbAction());
- final repositoryProvider =
-     Provider<IDbRepository>((ref) => DbRepository(ref.watch(databaseProvider)));
+final repositoryProvider =
+    Provider<IDbRepository>((ref) => DbRepository(ref.watch(databaseProvider)));

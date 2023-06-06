@@ -2,10 +2,10 @@ import 'models/models.dart';
 
 class LiterallyData {
   static List<Region> regionsData = [
-    Region(name: 'Eastern Africe'),
-    Region(name: 'Middle Africe'),
-    Region(name: 'Southern Africe'),
-    Region(name: 'Western Africe'),
+    Region(name: 'Eastern Africa'),
+    Region(name: 'Middle Africa'),
+    Region(name: 'Southern Africa'),
+    Region(name: 'Western Africa'),
   ];
 
   static List<Country> countriesData = [

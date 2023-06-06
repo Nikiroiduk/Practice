@@ -9,6 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  go_router: ^7.1.1
   hooks_riverpod: ^2.3.6
   path: ^1.8.3
   sqflite: ^2.2.8+4

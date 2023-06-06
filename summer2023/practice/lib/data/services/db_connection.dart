@@ -11,6 +11,7 @@ class DbConnection {
     db = await openDatabase(
       join(await getDatabasesPath(), "my_db.db"),
       onCreate: (db, version) => _createDb(db),
+      // onOpen: (db) => _createDb(db),
       version: 1,
     );
     return db;
