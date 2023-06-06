@@ -1,9 +1,24 @@
-import 'country.dart';
-
 class Region {
   final int id;
   final String name;
-  final List<Country> countries;
 
-  Region({required this.id, required this.name, required this.countries});
+  Region({this.id = -1, required this.name});
+
+  Map<String, dynamic> toMap() {
+    return {
+      "name": name,
+    };
+  }
+
+  static Region fromMap(Map<String, dynamic> map) {
+    return Region(
+      id: map["id"],
+      name: map["name"],
+    );
+  }
+
+  @override
+  String toString() {
+    return "id: $id, name: $name";
+  }
 }

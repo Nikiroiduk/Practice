@@ -1,9 +1,7 @@
-import 'dart:math';
-
+import 'package:path/path.dart';
 import 'package:practice/data/services/db_connection.dart';
 import 'package:sqflite/sqflite.dart';
 
-import '../models/models.dart';
 
 typedef ResponseEntity = Map<String, dynamic>;
 typedef ResponseEntityList = List<ResponseEntity>;
@@ -32,16 +30,45 @@ class DbAction {
     return base.query(DbConnection.regionTable);
   }
 
-  Future<bool> meh() async {
-    var base = await db;
-    var res = 0;
+  Future<ResponseEntity> insertExport(final ResponseEntity export) async {
+    final base = await db;
+    late final ResponseEntity exportEntity;
     await base.transaction((txn) async {
-      res = await txn.insert(
-        DbConnection.exportTable,
-        Export(year: Random().nextInt(22) + 2000, quantity: (Random().nextDouble() + 1) * 87).toMap(),
-        conflictAlgorithm: ConflictAlgorithm.replace,
-      );
+      final id = await txn.insert(DbConnection.exportTable, export,
+          conflictAlgorithm: ConflictAlgorithm.replace);
+      final results = await txn
+          .query(DbConnection.exportTable, where: "id = ?", whereArgs: [id]);
+      exportEntity = results.first;
     });
-    return res != 0;
+    return exportEntity;
   }
+
+  Future<ResponseEntity> insertCountry(final ResponseEntity country) async {
+    final base = await db;
+    late final ResponseEntity countryEntity;
+    await base.transaction((txn) async {
+      final id = await txn.insert(DbConnection.countryTable, country,
+          conflictAlgorithm: ConflictAlgorithm.replace);
+      final results = await txn
+          .query(DbConnection.countryTable, where: "id = ?", whereArgs: [id]);
+      countryEntity = results.first;
+    });
+    return countryEntity;
+  }
+
+    Future<ResponseEntity> insertRegion(final ResponseEntity region) async {
+    final base = await db;
+    late final ResponseEntity regionEntity;
+    await base.transaction((txn) async {
+      final id = await txn.insert(DbConnection.regionTable, region,
+          conflictAlgorithm: ConflictAlgorithm.replace);
+      final results = await txn
+          .query(DbConnection.regionTable, where: "id = ?", whereArgs: [id]);
+      regionEntity = results.first;
+    });
+    return regionEntity;
+  }
+
+  Future<void> deleteDatabase() async =>
+    databaseFactory.deleteDatabase(join(await getDatabasesPath(), "my_db.db"));
 }

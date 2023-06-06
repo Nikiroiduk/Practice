@@ -10,26 +10,7 @@ class DbConnection {
   static Future<Database?> initDb() async {
     db = await openDatabase(
       join(await getDatabasesPath(), "my_db.db"),
-      onCreate: (db, version) {
-        return db.execute('''
-        CREATE TABLE $exportTable (
-          id integer PRIMARY key AUTOINCREMENT,
-          year integer NOT NULL,
-          quantity real NOT NULL
-        );
-        CREATE TABLE $countryTable (
-          id integer PRIMARY key AUTOINCREMENT,
-          name text NOT NULL,
-          export_id integer,
-          FOREIGN key(export_id) REFERENCES export(id)
-        );
-        CREATE TABLE $regionTable (
-          id integer PRIMARY KEY AUTOINCREMENT,
-          name text NOT NULL,
-          country_id integer,
-          FOREIGN KEY(country_id) REFERENCES country(id)
-        );''');
-      },
+      onCreate: (db, version) => _createDb(db),
       version: 1,
     );
     return db;
@@ -41,5 +22,27 @@ class DbConnection {
     } else {
       return db;
     }
+  }
+
+  static void _createDb(Database db) {
+    db.execute('''CREATE TABLE $regionTable (
+          id integer PRIMARY KEY AUTOINCREMENT,
+          name text NOT NULL
+        );''');
+
+    db.execute('''CREATE TABLE $countryTable (
+          id integer PRIMARY key AUTOINCREMENT,
+          name text NOT NULL,
+          region_id integer NOT NULL,
+          FOREIGN KEY(region_id) REFERENCES $regionTable(id)
+        );''');
+
+    db.execute('''CREATE TABLE $exportTable (
+          id integer PRIMARY key AUTOINCREMENT,
+          year integer NOT NULL,
+          quantity real NOT NULL,
+          country_id integer NOT NULL,
+          FOREIGN KEY(country_id) REFERENCES $countryTable(id)
+        );''');
   }
 }

@@ -9,31 +9,44 @@ class DbRepository implements IDbRepository {
   const DbRepository(this.database);
 
   @override
-  Future<ResponseEntityList> getAllCountries() async {
-    // TODO: implement getAllCountries
-    throw UnimplementedError();
+  Future<List<Country>> getAllCountries() async {
+    final countriesListEntity = await database.allCountries();
+    return countriesListEntity.map((e) => Country.fromMap(e)).toList();
   }
 
   @override
   Future<List<Export>> getAllExports() async {
-    final countriesListEntity = await database.allExports();
-    print(countriesListEntity);
-    return countriesListEntity.map((e) => Export.fromMap(e)).toList();
+    final exportsListEntity = await database.allExports();
+    return exportsListEntity.map((e) => Export.fromMap(e)).toList();
   }
 
   @override
-  Future<ResponseEntityList> getAllRegions() async {
-    // TODO: implement getAllRegions
-    throw UnimplementedError();
+  Future<List<Region>> getAllRegions() async {
+    final regionsListEntity = await database.allRegions();
+    return regionsListEntity.map((e) => Region.fromMap(e)).toList();
   }
 
   @override
-  Future<bool> createMockExports(int quantity) async {
-    for (var i = 0; i < quantity; i++) {
-      var r = await database.meh();
-      print('$i: $r');
-      if (r != true) return false;
-    }
-    return true;
+  Future<Country> insertCountry(Country country) async {
+    final responseEntity = await database.insertCountry(country.toMap());
+    return Country.fromMap(responseEntity);
+  }
+
+  @override
+  Future<Export> insertExport(Export export) async {
+    final responseEntity = await database.insertExport(export.toMap());
+    return Export.fromMap(responseEntity);
+  }
+
+  @override
+  Future<Region> insertRegion(Region region) async {
+    final responseEntity = await database.insertRegion(region.toMap());
+    return Region.fromMap(responseEntity);
+  }
+
+  @override
+  Future<void> removeDb() async {
+    print('Removing DB...');
+    return database.deleteDatabase();
   }
 }

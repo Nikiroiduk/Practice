@@ -1,11 +1,13 @@
-import 'package:practice/data/services/db_actions.dart';
-
 import '../models/models.dart';
 
 abstract class IDbRepository {
   Future<List<Export>> getAllExports();
-  Future<ResponseEntityList> getAllCountries();
-  Future<ResponseEntityList> getAllRegions();
+  Future<List<Country>> getAllCountries();
+  Future<List<Region>> getAllRegions();
 
-  Future<bool> createMockExports(int quantity);
+  Future<Export> insertExport(Export export);
+  Future<Country> insertCountry(Country country);
+  Future<Region> insertRegion(Region region);
+
+  Future<void> removeDb();
 }
