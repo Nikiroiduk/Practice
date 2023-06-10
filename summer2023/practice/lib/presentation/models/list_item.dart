@@ -36,7 +36,7 @@ class ListItem {
   bool operator ==(Object other) {
     return (other is ListItem) && other.hashCode == hashCode;
   }
-  
+
   @override
   int get hashCode => '$quantity$year$region$country'.hashCode;
 }
@@ -55,7 +55,7 @@ class ListItemNotifier extends StateNotifier<List<ListItem>> {
     List<ListItem> result = await getData();
     var tmp = result.where((element) => element.year == 2004).toList();
     tmp.sort((a, b) => a.quantity.compareTo(b.quantity));
-    state = [tmp.first];
+    state = tmp;
   }
 
   exerciseTwoFilter() async {
@@ -86,22 +86,38 @@ class ListItemNotifier extends StateNotifier<List<ListItem>> {
     final countries = await _ref.read(repositoryProvider).getAllCountries();
     final exports = await _ref.read(repositoryProvider).getAllExports();
     final List<ListItem> result = [];
+
     for (var region in regions) {
-      final ctr =
-          countries.where((element) => element.regionId == region.id).toList();
-      List<Export> exp = [];
-      for (var country in ctr) {
-        exp = exports
-            .where((element) => element.countryId == country.id)
-            .toList();
-      }
-      for (var country in ctr) {
-        for (var export in exp) {
-          result.add(
-              ListItem.db(region: region, country: country, export: export));
+      for (var country
+          in countries.where((element) => element.regionId == region.id)) {
+        for (var export
+            in exports.where((element) => element.countryId == country.id)) {
+          result.add(ListItem(
+            region: region.name,
+            country: country.name,
+            year: export.year,
+            quantity: export.quantity,
+          ));
         }
       }
     }
+
+    // for (var region in regions) {
+    //   final ctr =
+    //       countries.where((element) => element.regionId == region.id).toList();
+    //   List<Export> exp = [];
+    //   for (var country in ctr) {
+    //     exp = exports
+    //         .where((element) => element.countryId == country.id)
+    //         .toList();
+    //   }
+    //   for (var country in ctr) {
+    //     for (var export in exp) {
+    //       result.add(
+    //           ListItem.db(region: region, country: country, export: export));
+    //     }
+    //   }
+    // }
     return result;
   }
 }
