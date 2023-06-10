@@ -69,6 +69,6 @@ class DbAction {
     return regionEntity;
   }
 
-  Future<void> deleteDatabase() async =>
-    databaseFactory.deleteDatabase(join(await getDatabasesPath(), "my_db.db"));
+  Future<void> deleteDatabase({name = "my_db.db"}) async =>
+    databaseFactory.deleteDatabase(join(await getDatabasesPath(), name));
 }

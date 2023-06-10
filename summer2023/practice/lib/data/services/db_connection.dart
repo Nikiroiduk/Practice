@@ -7,9 +7,9 @@ class DbConnection {
   static const String countryTable = 'country';
   static const String regionTable = 'region';
 
-  static Future<Database?> initDb() async {
+  static Future<Database?> initDb({required name}) async {
     db = await openDatabase(
-      join(await getDatabasesPath(), "my_db.db"),
+      join(await getDatabasesPath(), name),
       onCreate: (db, version) => _createDb(db),
       // onOpen: (db) => _createDb(db),
       version: 1,
@@ -17,9 +17,9 @@ class DbConnection {
     return db;
   }
 
-  static Future<Database?> getDbConnect() async {
+  static Future<Database?> getDbConnect({name = 'my_db.db'}) async {
     if (db == null) {
-      return await initDb();
+      return await initDb(name: name);
     } else {
       return db;
     }

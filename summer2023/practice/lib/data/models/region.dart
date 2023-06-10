@@ -21,4 +21,13 @@ class Region {
   String toString() {
     return "id: $id, name: $name";
   }
+
+  @override
+  bool operator ==(Object other) {
+    return other is Region && other.hashCode == hashCode;
+  }
+  
+  @override
+  int get hashCode => '$id$name'.hashCode;
+  
 }

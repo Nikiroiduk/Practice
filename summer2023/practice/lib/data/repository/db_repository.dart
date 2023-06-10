@@ -46,7 +46,6 @@ class DbRepository implements IDbRepository {
 
   @override
   Future<void> removeDb() async {
-    print('Removing DB...');
     return database.deleteDatabase();
   }
 }

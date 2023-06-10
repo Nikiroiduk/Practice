@@ -31,6 +31,14 @@ class ListItem {
   String toString() {
     return "region: $region, country: $country, year: $year, quantity: $quantity";
   }
+
+  @override
+  bool operator ==(Object other) {
+    return (other is ListItem) && other.hashCode == hashCode;
+  }
+  
+  @override
+  int get hashCode => '$quantity$year$region$country'.hashCode;
 }
 
 final listItemProvider =
@@ -78,7 +86,6 @@ class ListItemNotifier extends StateNotifier<List<ListItem>> {
     final countries = await _ref.read(repositoryProvider).getAllCountries();
     final exports = await _ref.read(repositoryProvider).getAllExports();
     final List<ListItem> result = [];
-    // TODO: meh
     for (var region in regions) {
       final ctr =
           countries.where((element) => element.regionId == region.id).toList();
