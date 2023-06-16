@@ -20,14 +20,23 @@ class SettingsScreen extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () async {
                     for (var region in LiterallyData.regionsData) {
-                      ref.read(repositoryProvider).insertRegion(region);
+                      var res = await ref
+                          .read(repositoryProvider)
+                          .insertRegion(region);
+                      print(res);
                     }
                     for (var country in LiterallyData.countriesData) {
-                      ref.read(repositoryProvider).insertCountry(country);
+                      var res = await ref
+                          .read(repositoryProvider)
+                          .insertCountry(country);
+                      print(res);
                     }
                     for (var exports in LiterallyData.exportsData) {
-                      for (var export in exports){
-                        ref.read(repositoryProvider).insertExport(export);
+                      for (var export in exports) {
+                        var res = await ref
+                            .read(repositoryProvider)
+                            .insertExport(export);
+                        print(res);
                       }
                     }
                   },

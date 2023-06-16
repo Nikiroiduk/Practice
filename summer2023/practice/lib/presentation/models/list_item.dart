@@ -51,22 +51,38 @@ class ListItemNotifier extends StateNotifier<List<ListItem>> {
   }
   final Ref _ref;
 
-  exerciseOneFilter() async {
-    List<ListItem> result = await getData();
+  exerciseOneFilter({bool test = false, List<ListItem> data = const []}) async {
+    List<ListItem> result = [];
+    if (!test) {
+      result = await getData();
+    } else {
+      result = data;
+    }
     var tmp = result.where((element) => element.year == 2004).toList();
     tmp.sort((a, b) => a.quantity.compareTo(b.quantity));
     state = tmp;
   }
 
-  exerciseTwoFilter() async {
-    List<ListItem> result = await getData();
+  exerciseTwoFilter({bool test = false, List<ListItem> data = const []}) async {
+    List<ListItem> result = [];
+    if (!test) {
+      result = await getData();
+    } else {
+      result = data;
+    }
     state = result
         .where((element) => (element.year == 2010 && element.quantity >= 1000))
         .toList();
   }
 
-  exerciseThreeFilter() async {
-    List<ListItem> result = await getData();
+  exerciseThreeFilter(
+      {bool test = false, List<ListItem> data = const []}) async {
+    List<ListItem> result = [];
+    if (!test) {
+      result = await getData();
+    } else {
+      result = data;
+    }
     state = result
         .where((element) => element.year == 2010 && element.quantity <= 2000)
         .toList();
@@ -101,23 +117,6 @@ class ListItemNotifier extends StateNotifier<List<ListItem>> {
         }
       }
     }
-
-    // for (var region in regions) {
-    //   final ctr =
-    //       countries.where((element) => element.regionId == region.id).toList();
-    //   List<Export> exp = [];
-    //   for (var country in ctr) {
-    //     exp = exports
-    //         .where((element) => element.countryId == country.id)
-    //         .toList();
-    //   }
-    //   for (var country in ctr) {
-    //     for (var export in exp) {
-    //       result.add(
-    //           ListItem.db(region: region, country: country, export: export));
-    //     }
-    //   }
-    // }
     return result;
   }
 }
